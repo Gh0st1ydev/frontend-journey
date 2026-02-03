@@ -125,6 +125,78 @@ li {
 }
 
 /* Адаптивность */
+/* Навигация */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+    background: white;
+    color: #6a11cb;
+}
+
+/* Мобильное меню (скрыто на десктопе) */
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.mobile-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+/* Обновляем адаптивность */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #6a11cb;
+        padding: 20px;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .nav-list.active {
+        display: flex;
+    }
+    
+    .mobile-toggle {
+        display: flex;
+    }
+    
+    .header-content {
+        flex-wrap: wrap;
+    }
+}
 @media (max-width: 768px) {
     .title {
         font-size: 2.2rem;

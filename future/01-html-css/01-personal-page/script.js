@@ -1,56 +1,75 @@
-// Обновляем дату в подвале
-function updateDate() {
-    const now = new Date();
-    const options = { 
-        day: 'numeric', 
-        month: 'long', 
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    
-    const formatter = new Intl.DateTimeFormat('ru-RU', options);
-    document.getElementById('current-date').textContent = formatter.format(now);
-}
-
-// Анимация при прокрутке
-function handleScrollAnimation() {
-    const sections = document.querySelectorAll('.section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (sectionTop < windowHeight * 0.85) {
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-        }
-    });
-}
-
-// Инициализация
+// Навигация
 document.addEventListener('DOMContentLoaded', function() {
-    // Обновляем дату
+    // Элементы
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navList = document.querySelector('.nav-list');
+    
+    // 1. Плавная прокрутка
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Прокрутка
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Мобильное меню: скрыть после клика
+                if (window.innerWidth <= 768) {
+                    navList.classList.remove('active');
+                }
+            }
+        });
+    });
+    
+    // 2. Мобильное меню
+    mobileToggle.addEventListener('click', function() {
+        navList.classList.toggle('active');
+    });
+    
+    // 3. Подсветка активного раздела при скролле
+    function updateActiveNav() {
+        const sections = document.querySelectorAll('section, footer');
+        
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const sectionId = section.getAttribute('id');
+            
+            if (rect.top <= 150 && rect.bottom >= 150) {
+                // Убираем активный класс у всех
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Добавляем активному
+                const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', updateActiveNav);
+    
+    // 4. Обновляем дату
+    function updateDate() {
+        const now = new Date();
+        const options = { 
+            day: 'numeric', 
+            month: 'long', 
+            year: 'numeric'
+        };
+        
+        const formatter = new Intl.DateTimeFormat('ru-RU', options);
+        document.getElementById('current-date').textContent = formatter.format(now);
+    }
+    
     updateDate();
     
-    // Настраиваем анимации
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-    
-    // Обработчик скролла
-    window.addEventListener('scroll', handleScrollAnimation);
-    
-    // Вызываем сразу для видимых элементов
-    handleScrollAnimation();
-    
-    // Простой клик-эффект для заголовка
-    document.querySelector('.title').addEventListener('click', function() {
-        this.style.color = this.style.color === '#ff6b6b' ? '#ffffff' : '#ff6b6b';
-    });
-    
-    console.log('Резюме загружено! Удачи в обучении! 🚀');
+    console.log('Навигация загружена! 🚀');
 });
