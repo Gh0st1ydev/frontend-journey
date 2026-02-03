@@ -73,3 +73,38 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Навигация загружена! 🚀');
 });
+// Анимация прогресс-баров
+function animateProgressBars() {
+    const progressBars = document.querySelectorAll('.progress-bar');
+    
+    progressBars.forEach(bar => {
+        // Получаем процент из стиля
+        const width = bar.style.width;
+        if (width) {
+            // Сбрасываем ширину для анимации
+            bar.style.width = '0';
+            
+            // Запускаем анимацию с задержкой
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        }
+    });
+}
+
+// Вызываем анимацию при загрузке
+setTimeout(animateProgressBars, 500);
+
+// И при клике на карточку
+document.querySelectorAll('.skill-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const progressBar = this.querySelector('.progress-bar');
+        if (progressBar) {
+            // "Пульсирующая" анимация
+            progressBar.style.transform = 'scaleX(1.05)';
+            setTimeout(() => {
+                progressBar.style.transform = 'scaleX(1)';
+            }, 200);
+        }
+    });
+});
