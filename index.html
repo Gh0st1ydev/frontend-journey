@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой путь в IT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        h1 {
+            color: #000000;
+        }
+        .today {
+            background-color: #fd0000;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .goals {
+            background-color: #097937;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1><img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" 
+     width="100" 
+     alt="Логотип JavaScript">🚀 Мой путь к Senior Frontend Developer</h1>
+    
+    <p>Привет! Меня зовут <strong>Никита</strong>.</p>
+    <p>Сегодня: <span class="today" id="currentDate"></span></p>
+    
+    <h2>📅 Мой план:</h2>
+      <ul>
+        <li>Моя цель: поступить в ВГТУ в 2025</li>
+        <li>2017-2025: Обучение и практика</li>
+        <li>2 часа в день</li>
+        <li>Первая цель: стать Junior за 1 год</li>
+    </ul>
+    
+    <div class="goals">
+        <h3>Что я сделал сегодня:</h3>
+        <p>✅ Установил и настроил VS Code</p>
+        <p>✅ Создал первый HTML-файл</p>
+        <p>🔲 Следующий шаг: изучить HTML теги</p>
+    </div>
+    
+    <h2>🔗 Мои ресурсы:</h2>
+    <p>Я буду учиться на:</p>
+    <ul>
+        <li>freeCodeCamp</li>
+        <li>YouTube-каналах</li>
+        <li>MDN Web Docs</li>
+    </ul>
+    
+    <footer>
+        <p>Это начало моего 7-летнего путешествия!</p>
+    </footer>
+
+    <script>
+        // Добавляем текущую дату
+        const now = new Date();
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('ru-RU', options);
+        
+        // Простая анимация
+        document.querySelector('h1').addEventListener('click', function() {
+            this.style.color = this.style.color === 'red' ? '#2c3e50' : 'red';
+        });
+    </script>
+</body>
+</html>
